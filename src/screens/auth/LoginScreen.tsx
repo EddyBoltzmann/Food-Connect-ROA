@@ -247,6 +247,17 @@ const LoginScreen: React.FC = () => {
                 </LinkText>
               </TouchableOpacity>
             </View>
+            
+            <View style={{ flexDirection: 'row', marginTop: 16 }}>
+              <Text variant="body" color="secondary">
+                Restaurant owner?{' '}
+              </Text>
+              <TouchableOpacity onPress={() => navigation.navigate('RestaurantLogin')}>
+                <LinkText variant="body" weight="medium">
+                  Restaurant Login
+                </LinkText>
+              </TouchableOpacity>
+            </View>
           </FooterContainer>
         </Content>
       </ScrollContainer>

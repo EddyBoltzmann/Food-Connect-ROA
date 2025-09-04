@@ -6,6 +6,8 @@ import { screenTransitions } from './transitions';
 // Import auth screens
 import LoginScreen from '../screens/auth/LoginScreen';
 import RegisterScreen from '../screens/auth/RegisterScreen';
+import RestaurantLoginScreen from '../screens/auth/RestaurantLoginScreen';
+import RestaurantRegisterScreen from '../screens/auth/RestaurantRegisterScreen';
 import ForgotPasswordScreen from '../screens/auth/ForgotPasswordScreen';
 
 const Stack = createStackNavigator<AuthStackParamList>();
@@ -30,6 +32,20 @@ const AuthNavigator: React.FC = () => {
       <Stack.Screen 
         name="Register" 
         component={RegisterScreen}
+        options={{
+          ...screenTransitions.Register,
+        }}
+      />
+      <Stack.Screen 
+        name="RestaurantLogin" 
+        component={RestaurantLoginScreen}
+        options={{
+          ...screenTransitions.Login,
+        }}
+      />
+      <Stack.Screen 
+        name="RestaurantRegister" 
+        component={RestaurantRegisterScreen}
         options={{
           ...screenTransitions.Register,
         }}

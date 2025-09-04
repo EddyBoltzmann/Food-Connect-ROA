@@ -20,6 +20,8 @@ import QRScanScreen from '../screens/QRScanScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import LoyaltyScreen from '../screens/LoyaltyScreen';
 import RestaurantDashboardScreen from '../screens/RestaurantDashboardScreen';
+import RestaurantOwnerDashboard from '../screens/restaurant/RestaurantOwnerDashboard';
+import MenuManagementScreen from '../screens/restaurant/MenuManagementScreen';
 
 // Import types
 import { RootStackParamList } from '../types';
@@ -66,13 +68,23 @@ const AppNavigator: React.FC = () => {
         ) : (
           // Authenticated stack
           <>
-            <Stack.Screen 
-              name="Main" 
-              component={MainNavigator}
-              options={{
-                ...screenTransitions.Home,
-              }}
-            />
+            {user?.role === 'restaurant_owner' ? (
+              <Stack.Screen 
+                name="RestaurantOwnerDashboard" 
+                component={RestaurantOwnerDashboard}
+                options={{
+                  ...screenTransitions.Home,
+                }}
+              />
+            ) : (
+              <Stack.Screen 
+                name="Main" 
+                component={MainNavigator}
+                options={{
+                  ...screenTransitions.Home,
+                }}
+              />
+            )}
             <Stack.Screen 
               name="Restaurant" 
               component={RestaurantScreen}

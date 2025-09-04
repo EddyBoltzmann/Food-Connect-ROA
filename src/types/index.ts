@@ -265,6 +265,8 @@ export type RootStackParamList = {
   Onboarding: undefined;
   Auth: undefined;
   Main: undefined;
+  RestaurantOwnerDashboard: undefined;
+  MenuManagement: undefined;
   Restaurant: { restaurantId: string };
   MenuItem: { menuItem: MenuItem };
   Cart: undefined;
@@ -280,6 +282,8 @@ export type RootStackParamList = {
 export type AuthStackParamList = {
   Login: undefined;
   Register: undefined;
+  RestaurantLogin: undefined;
+  RestaurantRegister: undefined;
   ForgotPassword: undefined;
 };
 
