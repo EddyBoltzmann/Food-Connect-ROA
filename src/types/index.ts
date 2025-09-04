@@ -28,9 +28,10 @@ export interface Address {
 
 export interface PaymentMethod {
   id: string;
-  type: 'card' | 'mobile_money' | 'cash';
+  type: 'debit_card' | 'mobile_money' | 'cash';
   last4?: string;
   brand?: string;
+  provider?: 'visa' | 'mastercard' | 'mtn' | 'vodafone' | 'airteltigo';
   isDefault: boolean;
 }
 
