@@ -22,6 +22,7 @@ import LoyaltyScreen from '../screens/LoyaltyScreen';
 import RestaurantDashboardScreen from '../screens/RestaurantDashboardScreen';
 import RestaurantOwnerDashboard from '../screens/restaurant/RestaurantOwnerDashboard';
 import MenuManagementScreen from '../screens/restaurant/MenuManagementScreen';
+import RestaurantSettingsScreen from '../screens/restaurant/RestaurantSettingsScreen';
 
 // Import types
 import { RootStackParamList } from '../types';
@@ -179,16 +180,28 @@ const AppNavigator: React.FC = () => {
               }}
             />
             {user?.role === 'restaurant_owner' && (
-              <Stack.Screen 
-                name="RestaurantDashboard" 
-                component={RestaurantDashboardScreen}
-                options={{
-                  ...screenTransitions.RestaurantDashboard,
-                  headerShown: true,
-                  title: 'Restaurant Dashboard',
-                  headerBackTitleVisible: false,
-                }}
-              />
+              <>
+                <Stack.Screen 
+                  name="RestaurantDashboard" 
+                  component={RestaurantDashboardScreen}
+                  options={{
+                    ...screenTransitions.RestaurantDashboard,
+                    headerShown: true,
+                    title: 'Restaurant Dashboard',
+                    headerBackTitleVisible: false,
+                  }}
+                />
+                <Stack.Screen 
+                  name="RestaurantSettings" 
+                  component={RestaurantSettingsScreen}
+                  options={{
+                    ...screenTransitions.Profile,
+                    headerShown: true,
+                    title: 'Restaurant Settings',
+                    headerBackTitleVisible: false,
+                  }}
+                />
+              </>
             )}
           </>
         )}

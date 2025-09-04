@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import { View, ScrollView, Animated, Easing, TouchableOpacity, RefreshControl } from 'react-native';
 import styled from 'styled-components/native';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { RootState, AppDispatch } from '../../store';
 import { fetchIngredients } from '../../store/slices/inventorySlice';
 import { Text } from '../../components/common/Text';
@@ -11,7 +13,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import InventoryDashboard from '../../components/inventory/InventoryDashboard';
 import IngredientForm from '../../components/inventory/IngredientForm';
 import MenuAvailabilityManager from '../../components/inventory/MenuAvailabilityManager';
-import { Ingredient, MenuItem } from '../../types';
+import OrderManagementScreen from './OrderManagementScreen';
+import AnalyticsScreen from './AnalyticsScreen';
+import RestaurantSettingsScreen from './RestaurantSettingsScreen';
+import { Ingredient, MenuItem, RootStackParamList } from '../../types';
 
 const Container = styled.View`
   flex: 1;
@@ -185,7 +190,10 @@ const ActivityTime = styled(Text)`
 
 type TabType = 'overview' | 'inventory' | 'menu' | 'orders' | 'analytics' | 'settings';
 
+type RestaurantOwnerDashboardNavigationProp = StackNavigationProp<RootStackParamList>;
+
 const RestaurantOwnerDashboard: React.FC = () => {
+  const navigation = useNavigation<RestaurantOwnerDashboardNavigationProp>();
   const dispatch = useDispatch<AppDispatch>();
   const { user } = useSelector((state: RootState) => state.auth);
   const { ingredients, lowStockItems } = useSelector((state: RootState) => state.inventory);
@@ -328,6 +336,7 @@ const RestaurantOwnerDashboard: React.FC = () => {
               variant="outline"
               size="small"
               icon="settings"
+              onPress={() => navigation.navigate('RestaurantSettings')}
             />
           </Header>
 
@@ -452,25 +461,15 @@ const RestaurantOwnerDashboard: React.FC = () => {
           )}
 
           {activeTab === 'orders' && (
-            <Card>
-              <Text variant="h3" weight="semiBold" style={{ marginBottom: 16 }}>
-                Recent Orders
-              </Text>
-              <Text variant="body" color="secondary">
-                Order management functionality coming soon...
-              </Text>
-            </Card>
+            <OrderManagementScreen />
           )}
 
           {activeTab === 'analytics' && (
-            <Card>
-              <Text variant="h3" weight="semiBold" style={{ marginBottom: 16 }}>
-                Analytics
-              </Text>
-              <Text variant="body" color="secondary">
-                Analytics dashboard coming soon...
-              </Text>
-            </Card>
+            <AnalyticsScreen />
+          )}
+
+          {activeTab === 'settings' && (
+            <RestaurantSettingsScreen />
           )}
         </Animated.View>
       </ScrollView>

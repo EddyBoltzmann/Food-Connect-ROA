@@ -267,6 +267,7 @@ export type RootStackParamList = {
   Main: undefined;
   RestaurantOwnerDashboard: undefined;
   MenuManagement: undefined;
+  RestaurantSettings: undefined;
   Restaurant: { restaurantId: string };
   MenuItem: { menuItem: MenuItem };
   Cart: undefined;
