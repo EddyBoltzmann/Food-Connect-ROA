@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import { screenTransitions } from './transitions';
 
 // Import screens
 import SplashScreen from '../screens/SplashScreen';
@@ -40,36 +41,43 @@ const AppNavigator: React.FC = () => {
         screenOptions={{
           headerShown: false,
           gestureEnabled: true,
-          cardStyleInterpolator: ({ current, layouts }) => {
-            return {
-              cardStyle: {
-                transform: [
-                  {
-                    translateX: current.progress.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [layouts.screen.width, 0],
-                    }),
-                  },
-                ],
-              },
-            };
-          },
+          cardStyleInterpolator: screenTransitions.Home.cardStyleInterpolator,
+          transitionSpec: screenTransitions.Home.transitionSpec,
         }}
       >
         {!isAuthenticated ? (
           // Unauthenticated stack
           <>
-            <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-            <Stack.Screen name="Auth" component={AuthNavigator} />
+            <Stack.Screen 
+              name="Onboarding" 
+              component={OnboardingScreen}
+              options={{
+                ...screenTransitions.Onboarding,
+              }}
+            />
+            <Stack.Screen 
+              name="Auth" 
+              component={AuthNavigator}
+              options={{
+                ...screenTransitions.Login,
+              }}
+            />
           </>
         ) : (
           // Authenticated stack
           <>
-            <Stack.Screen name="Main" component={MainNavigator} />
+            <Stack.Screen 
+              name="Main" 
+              component={MainNavigator}
+              options={{
+                ...screenTransitions.Home,
+              }}
+            />
             <Stack.Screen 
               name="Restaurant" 
               component={RestaurantScreen}
               options={{
+                ...screenTransitions.Restaurant,
                 headerShown: true,
                 title: 'Restaurant',
                 headerBackTitleVisible: false,
@@ -79,24 +87,29 @@ const AppNavigator: React.FC = () => {
               name="MenuItem" 
               component={MenuItemScreen}
               options={{
+                ...screenTransitions.MenuItem,
                 headerShown: true,
                 title: 'Menu Item',
                 headerBackTitleVisible: false,
+                presentation: 'modal',
               }}
             />
             <Stack.Screen 
               name="Cart" 
               component={CartScreen}
               options={{
+                ...screenTransitions.Cart,
                 headerShown: true,
                 title: 'Cart',
                 headerBackTitleVisible: false,
+                presentation: 'modal',
               }}
             />
             <Stack.Screen 
               name="Checkout" 
               component={CheckoutScreen}
               options={{
+                ...screenTransitions.Checkout,
                 headerShown: true,
                 title: 'Checkout',
                 headerBackTitleVisible: false,
@@ -106,6 +119,7 @@ const AppNavigator: React.FC = () => {
               name="OrderTracking" 
               component={OrderTrackingScreen}
               options={{
+                ...screenTransitions.OrderTracking,
                 headerShown: true,
                 title: 'Order Tracking',
                 headerBackTitleVisible: false,
@@ -115,6 +129,7 @@ const AppNavigator: React.FC = () => {
               name="Chat" 
               component={ChatScreen}
               options={{
+                ...screenTransitions.Chat,
                 headerShown: true,
                 title: 'Chat',
                 headerBackTitleVisible: false,
@@ -124,15 +139,18 @@ const AppNavigator: React.FC = () => {
               name="QRScan" 
               component={QRScanScreen}
               options={{
+                ...screenTransitions.QRScan,
                 headerShown: true,
                 title: 'Scan QR Code',
                 headerBackTitleVisible: false,
+                presentation: 'modal',
               }}
             />
             <Stack.Screen 
               name="Profile" 
               component={ProfileScreen}
               options={{
+                ...screenTransitions.Profile,
                 headerShown: true,
                 title: 'Profile',
                 headerBackTitleVisible: false,
@@ -142,6 +160,7 @@ const AppNavigator: React.FC = () => {
               name="Loyalty" 
               component={LoyaltyScreen}
               options={{
+                ...screenTransitions.Loyalty,
                 headerShown: true,
                 title: 'Loyalty Points',
                 headerBackTitleVisible: false,
@@ -152,6 +171,7 @@ const AppNavigator: React.FC = () => {
                 name="RestaurantDashboard" 
                 component={RestaurantDashboardScreen}
                 options={{
+                  ...screenTransitions.RestaurantDashboard,
                   headerShown: true,
                   title: 'Restaurant Dashboard',
                   headerBackTitleVisible: false,

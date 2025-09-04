@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AuthStackParamList } from '../types';
+import { screenTransitions } from './transitions';
 
 // Import auth screens
 import LoginScreen from '../screens/auth/LoginScreen';
@@ -15,28 +16,29 @@ const AuthNavigator: React.FC = () => {
       screenOptions={{
         headerShown: false,
         gestureEnabled: true,
-        cardStyleInterpolator: ({ current, layouts }) => {
-          return {
-            cardStyle: {
-              transform: [
-                {
-                  translateX: current.progress.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [layouts.screen.width, 0],
-                  }),
-                },
-              ],
-            },
-          };
-        },
+        cardStyleInterpolator: screenTransitions.Login.cardStyleInterpolator,
+        transitionSpec: screenTransitions.Login.transitionSpec,
       }}
     >
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen 
+        name="Login" 
+        component={LoginScreen}
+        options={{
+          ...screenTransitions.Login,
+        }}
+      />
+      <Stack.Screen 
+        name="Register" 
+        component={RegisterScreen}
+        options={{
+          ...screenTransitions.Register,
+        }}
+      />
       <Stack.Screen 
         name="ForgotPassword" 
         component={ForgotPasswordScreen}
         options={{
+          ...screenTransitions.ForgotPassword,
           headerShown: true,
           title: 'Reset Password',
           headerBackTitleVisible: false,
