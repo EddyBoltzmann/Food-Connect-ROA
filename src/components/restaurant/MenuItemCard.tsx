@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity, Image, View } from 'react-native';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import InventoryStatusBadge from './InventoryStatusBadge';
 
 interface MenuItem {
   id: string;
@@ -10,6 +11,7 @@ interface MenuItem {
   price: number;
   image: string;
   isAvailable: boolean;
+  isLowStock?: boolean;
   dietaryTags?: Array<{
     id: string;
     name: string;
@@ -176,6 +178,9 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({ item, onPress }) => {
                 ))}
               </DietaryTags>
             )}
+
+            {/* Inventory Status Badge */}
+            <InventoryStatusBadge menuItem={item} />
           </ItemInfo>
 
           <BottomRow>

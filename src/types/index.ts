@@ -14,6 +14,30 @@ export interface User {
   updatedAt: string;
 }
 
+// Inventory Types
+export interface Ingredient {
+  id: string;
+  name: string;
+  category: 'protein' | 'vegetable' | 'dairy' | 'grain' | 'spice' | 'beverage' | 'other';
+  unit: 'kg' | 'g' | 'l' | 'ml' | 'pieces' | 'cups' | 'tbsp' | 'tsp';
+  currentStock: number;
+  minimumStock: number;
+  costPerUnit: number;
+  supplier?: string;
+  expiryDate?: string;
+  isLowStock: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface MenuItemIngredient {
+  ingredientId: string;
+  ingredientName: string;
+  quantity: number;
+  unit: string;
+  isRequired: boolean; // If true, item becomes unavailable when ingredient is out of stock
+}
+
 export interface Address {
   id: string;
   label: string;
@@ -91,6 +115,8 @@ export interface MenuItem {
   isAvailable: boolean;
   preparationTime: number;
   order: number;
+  ingredients: MenuItemIngredient[];
+  isLowStock: boolean;
   createdAt: string;
   updatedAt: string;
 }

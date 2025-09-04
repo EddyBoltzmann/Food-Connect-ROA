@@ -11,6 +11,7 @@ import ordersReducer from './slices/ordersSlice';
 import chatReducer from './slices/chatSlice';
 import loyaltyReducer from './slices/loyaltySlice';
 import appReducer from './slices/appSlice';
+import inventoryReducer from './slices/inventorySlice';
 
 // Persist config
 const persistConfig = {
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   chat: chatReducer,
   loyalty: loyaltyReducer,
   app: appReducer,
+  inventory: inventoryReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
